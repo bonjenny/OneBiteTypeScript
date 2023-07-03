@@ -2,11 +2,6 @@
 
 
 
-
-
-
-
-
 // 2장 숫자
 
 // p.15
@@ -40,5 +35,5 @@ console.log(-"123", typeof (-"123"));
 
 // p.19 - 나머지 연산자
 console.log(-3 / 5);
-console.log(-3 % 5);              // -1, remainer: 피제수의 부호를 따름
-console.log(((-3 % 5) + 5) % 5);  // 1, modulo: 제수의 부호를 따름
+console.log(-3 % 5);              // -3, remainer: 피제수의 부호를 따름
+console.log(((-3 % 5) + 5) % 5);  // 2, modulo: 제수의 부호를 따름
