@@ -9,24 +9,16 @@ function addLength<T extends number | string>(
   fnGetLength: Function,
   type: string = "value"
 ) {
-  if (!type) {
-    type = "value";
-  }
+  if (!type) type = "value";
   switch (type) {
     case "value":
-      if (typeof value1 === "number" && typeof value2 === "number") {
-        return fnGetLength(value1 + value2);
-      }
-      if (typeof value1 === "string" && typeof value2 === "string") {
-        return fnGetLength(value1 + value2);
-      }
-
-      return fnGetLength(value1) + fnGetLength(value2);
+      return fnGetLength((value1 as any) + value2);
     case "length":
       return fnGetLength(value1) + fnGetLength(value2);
   }
 }
 
+console.log(addLength(5, 10, getLength, "value"));
 console.log(addLength(5, 10, getLength, "length"));
 console.log(addLength("Hello", "World", getLength));
 

@@ -1,3 +1,10 @@
+/**
+ * 7/4(화)
+ * 1-1) 타입스크립트 소개
+ * https://cat-antlion-144.notion.site/4a0af5353d1d42a5ab30fb28cd1931ea?pvs=25
+ * =============================================================
+ */
+
 // js: sum 함수
 function sum1(a, b) {
   return a + b;
