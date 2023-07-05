@@ -43,19 +43,6 @@ export function logPerson(person: Person) {
   );
 }
 
-// export function filterPersons(persons: Person[], personType: 'user', criteria: Omit<Partial<User>, 'type'>): User[];
-// export function filterPersons(persons: Person[], personType: 'admin', criteria: Omit<Partial<Admin>, 'type'>): Admin[];
-// export function filterPersons(persons: Person[], personType: string, criteria: Omit<Partial<User>,'type'> | Omit<Partial<Admin>, 'type'> ): Person[] {
-//     return persons
-//         .filter((person) => person.type === personType)
-//         .filter((person) => {
-//             let criteriaKeys = Object.keys(criteria) as (keyof Omit<Person, 'type'>)[];
-//             return criteriaKeys.every((fieldName) => {
-//                 return person[fieldName] === criteria[fieldName];
-//             });
-//         });
-// }
-
 function isUserArray(arr: Person[]): arr is User[] {
   return arr.every((x) => x.type === "user");
 }
@@ -79,14 +66,17 @@ export function filterPersons(
   personType: string,
   criteria: Omit<Partial<User>, "type"> | Omit<Partial<Admin>, "type">
 ): Person[] {
-  return persons;
-  // .filter((person) => person.type === personType)
-  // .filter((person) => {
-  //     let criteriaKeys = Object.keys(criteria) as (keyof Omit<Person, 'type'>)[];
-  //     return criteriaKeys.every((fieldName) => {
-  //         return person[fieldName] === criteria[fieldName];
-  //     });
-  // });
+  return persons
+    .filter((person) => person.type === personType)
+    .filter((person) => {
+      let criteriaKeys = Object.keys(criteria) as (keyof Pick<
+        Person,
+        "age" | "name"
+      >)[];
+      return criteriaKeys.every((fieldName) => {
+        return person[fieldName] === criteria[fieldName];
+      });
+    });
 }
 
 export const usersOfAge23 = filterPersons(persons, "user", { age: 23 });
