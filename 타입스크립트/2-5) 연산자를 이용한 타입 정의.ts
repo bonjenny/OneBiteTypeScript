@@ -1,88 +1,51 @@
 /**
- * 7/4(화)
+ * 7/5(수)
  * 2-5) 연산자를 이용한 타입 정의
  * https://cat-antlion-144.notion.site/5662ca3169af42d3a17120c2c9fd14cf?pvs=25
  * =============================================================
  */
 
-// <<숫자형 이넘>>
-enum Direction {
-  Up, // 0
-  Down, // 1
+// <<Union Type>>
+// union 타입은 서로 다른 두 개 이상의 타입들을 사용하여 만드는 것으로,
+// 사용된 타입 중 무엇이든 하나를 타입으로 가질 수 있습니다.
+
+function logText(text: string | number) {
+  console.log(text);
 }
 
-function go(direction: Direction) {
-  switch (direction) {
-    case Direction.Up:
-      console.log("go up");
-      break;
-    case Direction.Down:
-      console.log("go down");
-      break;
+// 숫자와 문자 모두 사용 가능합니다
+logText("text");
+logText(100);
+// logText([1]); // never 형식의 인수는 할당 불가
+
+function welcomePeople(x: string[] | string) {
+  if (Array.isArray(x)) {
+    // 여기에서 'x'는 'string[]' 타입입니다
+    console.log("Hello, " + x.join(" and "));
+  } else {
+    // 여기에서 'x'는 'string' 타입입니다
+    console.log("Welcome lone traveler " + x);
   }
 }
-go(Direction.Down);
 
-// <<문자형 이넘>>
-enum Direction2 {
-  Up = "UP",
-  Down = "DOWN",
-  Left = "LEFT",
-  Right = "RIGHT",
+// <<Intersection Type>>
+// intersection 타입은 사용된 타입 모두를 만족하는 타입으로써
+// 여러 타입을 하나로 합칩니다
+
+interface Person {
+  name: string;
+  age: number;
+}
+interface Developer {
+  name: string;
+  skill: string;
 }
 
-// <<런타임 시점에서의 이넘 특징>>
-enum E {
-  X,
-  Y,
-  Z,
-}
+// Person과 Developer의 속성을 모두 가집니다
+const someone: Person & Developer = {
+  name: "john",
+  age: 30,
+  skill: "typescript",
+};
 
-function getX(obj: { X: number }) {
-  return obj.X;
-}
-console.log(getX(E)); // 이넘 E의 X는 숫자이기 때문에 정상 동작
-
-// // 내부에서는...
-// var E;
-// (function (E) {
-//   E[(E["X"] = 0)] = "X";
-//   E[(E["Y"] = 1)] = "Y";
-//   E[(E["Z"] = 2)] = "Z";
-// })(E || (E = {}));
-// function getX(obj) {
-//   return obj.X;
-// }
-// console.log(getX(E)); // 이넘 E의 X는 숫자이기 때문에 정상 동작
-
-// 리버스 매핑
-enum Enum {
-  A,
-}
-let a = Enum.A; // 키로 값을 획득 하기
-let keyName = Enum[a]; // 값으로 키를 획득 하기
-console.log(keyName);
-
-// const enum
-const enum Direction3 {
-  Up,
-  Down,
-  Left,
-  Right,
-}
-
-let directions = [
-  Direction3.Up,
-  Direction3.Down,
-  Direction3.Left,
-  Direction3.Right,
-];
-console.log(directions);
-
-// 내부에서는...
-// let directions = [
-//   0 /* Direction.Up */,
-//   1 /* Direction.Down */,
-//   2 /* Direction.Left */,
-//   3 /* Direction.Right */,
-// ];
+console.log(someone);
