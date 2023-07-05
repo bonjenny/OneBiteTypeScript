@@ -5,35 +5,6 @@
  * =============================================================
  */
 
-/*
-
-Intro:
-
-    PowerUsers idea was bad. Once those users got
-    extended permissions, they started bullying others
-    and we lost a lot of great users.
-    As a response we spent all the remaining money
-    on the marketing and got even more users.
-    We need to start preparing to move everything to a
-    real database. For now we just do some mocks.
-
-    The server API format was decided to be the following:
-
-    In case of success: { status: 'success', data: RESPONSE_DATA }
-    In case of error: { status: 'error', error: ERROR_MESSAGE }
-
-    The API engineer started creating types for this API and
-    quickly figured out that the amount of types needed to be
-    created is too big.
-
-Exercise:
-
-    Remove UsersApiResponse and AdminsApiResponse types
-    and use generic type ApiResponse in order to specify API
-    response formats for each of the functions.
-
-*/
-
 interface User {
   type: "user";
   name: string;
@@ -66,8 +37,14 @@ const users: User[] = [
 ];
 
 export type ApiResponse<T> =
-  | { status: "success"; data: T }
-  | { status: "error"; error: string };
+  | {
+      status: "success";
+      data: T;
+    }
+  | {
+      status: "error";
+      error: string;
+    };
 
 export function requestAdmins(
   callback: (response: ApiResponse<Admin[]>) => void
