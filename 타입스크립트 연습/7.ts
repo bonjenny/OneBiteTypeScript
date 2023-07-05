@@ -5,40 +5,26 @@
  * =============================================================
  */
 
-type swapType = User | Admin;
-
-interface Person {
-  type: string;
+interface User {
+  type: "user";
   name: string;
   age: number;
-}
-
-interface User extends Person {
-  type: "user";
   occupation: string;
 }
 
-interface Admin extends Person {
+interface Admin {
   type: "admin";
+  name: string;
+  age: number;
   role: string;
 }
 
-function isUser(arg: any): arg is User {
-  return arg.occupation !== undefined;
-}
-
-function isAdmin(arg: any): arg is Admin {
-  return arg.role !== undefined;
-}
-
-function logUser(user: Person) {
-  if (!isUser(user)) return;
+function logUser(user: User) {
   const pos = users.indexOf(user) + 1;
   console.log(` - #${pos} User: ${user.name}, ${user.age}, ${user.occupation}`);
 }
 
-function logAdmin(admin: Person) {
-  if (!isAdmin(admin)) return;
+function logAdmin(admin: Admin) {
   const pos = admins.indexOf(admin) + 1;
   console.log(` - #${pos} Admin: ${admin.name}, ${admin.age}, ${admin.role}`);
 }
@@ -73,7 +59,7 @@ const users: User[] = [
   },
 ];
 
-export function swap(v1: any, v2: any) {
+export function swap<T1, T2>(v1: T1, v2: T2): [T2, T1] {
   return [v2, v1];
 }
 
