@@ -3,7 +3,11 @@
     "target": "ESNext",
     "module": "ESNext",
     "outDir": "dist",
-    "strict": true
+    // "moduleDetection": "force",
+    "strict": false
+  },
+  "ts-node": {
+    "esm": true
   },
   "include": ["src"]
 }
