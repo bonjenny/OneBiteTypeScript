@@ -52,13 +52,17 @@
 // const a = 1;
 // export {}; // 옵션만 추가했을 뿐인데 모듈 키워드가 자동으로 추가됨
 
-// <<Unknown compiler option 'moduleDetection'.>>
+// <<Unexpected token 'export'>>
+// node dist/index.js 시 발생
+
+// - package.json
 // "type": "module"
 
-// <<Unknown file extension ".ts" for ~>>
+// - tsconfig.json
 // "ts-node": {
 //   "esm": true
 // }
+
 // ts-node는 기본적으로 CommonJS 모듈 시스템을 사용하기 때문에
 // ESNext의 export 문법을 읽지 못함
 // 위 옵션을 설정해주면 읽을 수 있음
