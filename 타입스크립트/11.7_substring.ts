@@ -35,20 +35,17 @@ function getSeperateFormatValue(value: string, format_data: ITelNoFormatDataByNa
 		case 8:
 			return `${value.substring(0, 4)}${format_data.delimiter}${value.substring(4)}`;
 		case 9:
-			// if (value.substring(0, 2) != '02') return value;
 			return `${value.substring(0, 2)}${format_data.delimiter}${value.substring(2, 5)}${format_data.delimiter}${value.substring(5)}`;
 		case 10:
-			if (value.substring(0, 2) == '02')
-				return `${value.substring(0, 2)}${format_data.delimiter}${value.substring(2, 6)}${format_data.delimiter}${value.substring(6)}`;
-			// if (value.substring(0, 2) == '03')
-			// 	return `${value.substring(0, 3)}${format_data.delimiter}${value.substring(3, 7)}${format_data.delimiter}${value.substring(7)}`;
-			return `${value.substring(0, 3)}${format_data.delimiter}${value.substring(3, 6)}${format_data.delimiter}${value.substring(6)}`
+			return value.substring(0, 2) == '02'
+				? `${value.substring(0, 2)}${format_data.delimiter}${value.substring(2, 6)}${format_data.delimiter}${value.substring(6)}`
+				: `${value.substring(0, 3)}${format_data.delimiter}${value.substring(3, 6)}${format_data.delimiter}${value.substring(6)}`;
 		case 11:
 			return `${value.substring(0, 3)}${format_data.delimiter}${value.substring(3, 7)}${format_data.delimiter}${value.substring(7)}`;
 	}
 }
 
-const value = '0311234567';
+const value = '03112345678';
 const format_data = {
   delimiter: '-',
   display_type: EN_CODE_DISPLAY_OTHERS_TYPE.Entered,
