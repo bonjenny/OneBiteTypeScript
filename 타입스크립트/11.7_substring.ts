@@ -31,19 +31,19 @@ export interface ITelNoFormatDataByNation {
 function getSeperateFormatValue(value: string, format_data: ITelNoFormatDataByNation) {
 	switch (value.length) {
 		case 7:
-			return `${value.substring(0, 3)}${format_data.delimiter}${value.substring(3)}`
+			return `${value.substring(0, 3)}${format_data.delimiter}${value.substring(3)}`;
 		case 8:
-			return `${value.substring(0, 4)}${format_data.delimiter}${value.substring(4)}`
-		case 10:
-			return `${value.substring(0, 3)}${format_data.delimiter}${value.substring(3, 6)}${format_data.delimiter}${value.substring(6)}`
+			return `${value.substring(0, 4)}${format_data.delimiter}${value.substring(4)}`;
 		case 11:
-			return `${value.substring(0, 3)}${format_data.delimiter}${value.substring(3, 7)}${format_data.delimiter}${value.substring(7)}`
-		case 12:
-			return `${value.substring(0, 4)}${format_data.delimiter}${value.substring(4, 8)}${format_data.delimiter}${value.substring(8)}`
+			return ['028', '024'].includes(value.substring(0, 3))
+				? `${value.substring(0, 3)}${format_data.delimiter}${value.substring(3, 7)}${format_data.delimiter}${value.substring(7)}`
+				: `${value.substring(0, 4)}${format_data.delimiter}${value.substring(4, 7)}${format_data.delimiter}${value.substring(7)}`;
+		default:
+			return value;
 	}
 }
 
-const value = '123456789012';
+const value = '02612345678';
 const format_data = {
   delimiter: '-',
   display_type: EN_CODE_DISPLAY_OTHERS_TYPE.Entered,
