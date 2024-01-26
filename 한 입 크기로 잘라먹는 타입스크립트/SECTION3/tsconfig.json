@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "outDir": "dist",
+    "strict": true,
+    "moduleDetection": "force",
+    "moduleResolution" :"Node" ,
+  },
+  "ts-node": {
+    "esm": true
+  },
+  "include": ["src"] // 어떤 파일을 컴파일할지
+}
