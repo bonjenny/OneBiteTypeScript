@@ -42,9 +42,35 @@ function neverExam() {
 
 /**
  * * <<Void 타입>>
- * 
+ * undefined 타입의 슈퍼타입
  */
 
 function voidExam() {
+  function voidFunc(): void {
+    console.log("hi");
+    return undefined; // todo: 문제가 되지 않음!
+  }
+
+  let voidVar: void = undefined;
+}
+
+/**
+ * * <<any 타입>>
+ * 타입 계층도를 완전히 무시해버리는, "치트키 타입"
+ * todo: 즉, 함부로 사용하는 것이 위험한 타입 >> 최대한 사용 자제
+ * 모든 타입의 슈퍼타입이 될 수도,
+ * 모든 타입의 서브타입이 될 수도 있음 (never 제외)
+ */
+
+function anyExam() {
+  let unknownVar: unknown;
+  let anyVar: any;
+  let undefinedVar: undefined;
+  let neverVar: never;
+
+  anyVar = unknownVar; // ! "다운캐스팅"이지만, 허용됨
+  undefinedVar = anyVar; // ! "다운캐스팅"이지만, 허용됨
   
+  // todo: never 타입은 정말 순수한 공집합이기 때문에 어떤 변수도, 심지어 any라도 다운캐스팅 불가
+  // neverVar = anyVar; // ! 'any' 형식은 'never' 형식에 할당할 수 없습니다.
 }
